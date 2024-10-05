@@ -1,0 +1,59 @@
+package controller;
+
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+
+@WebServlet("/register")
+public class Register extends HttpServlet {
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		try {
+			Class.forName("org.postgresql.Driver");
+			Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/shopkeeper","postgres","root");
+			
+			String name = req.getParameter("name");
+	        String email = req.getParameter("email");
+	        String phoneNumber = req.getParameter("phoneNumber");
+	        String password = req.getParameter("password");
+	        String confirmPassword = req.getParameter("confirmPassword");
+	        
+	        if (password.equals(confirmPassword)) {
+	        	PreparedStatement pstmt = conn.prepareStatement("INSERT INTO user (user_name, user_email, user_phone, password) VALUES (?, ?, ?, ?)");
+                pstmt.setString(1, name);
+                pstmt.setString(2, email);
+                pstmt.setString(3, phoneNumber);
+                pstmt.setString(4, password);
+
+                int rowsAffected = pstmt.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    response.sendRedirect("login.jsp");
+                } else {
+                    response.sendRedirect("register.jsp?error=Registration failed");
+                }
+
+	        }
+	        
+	        }
+
+
+			
+			
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+	}
+}

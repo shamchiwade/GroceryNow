@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shop Management System - Register</title>
+    <link rel="stylesheet " href="style.css">
+</head>
+<body>
+    <div class="main">
+        <h1>Shop Management System</h1>
+        <h3>Register</h3>
+        <form action="register">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="login.jsp">Login</a></p>
+    </div>
+</body>
+</html>

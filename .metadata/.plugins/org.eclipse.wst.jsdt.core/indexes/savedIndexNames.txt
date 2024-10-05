@@ -1,0 +1,6 @@
+INDEX VERSION 1.4+C:\Users\AAYUSH\Desktop\Projects\GloceryNow\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+545557123.index
+290424626.index
+3998731024.index
+3391518537.index
+274265639.index

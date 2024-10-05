@@ -1,0 +1,23 @@
+package model;
+
+import java.util.*;
+
+public class Laptop {
+	private String Brand;
+	private String Processor;
+	private String Display;
+	private String Memory;
+	private ArrayList<String> Ports;
+	private String category;
+	
+	public Laptop(String brand, String processor, String display, String memory, ArrayList<String> ports) {
+		super();
+		Brand = brand;
+		Processor = processor;
+		Display = display;
+		Memory = memory;
+		Ports = ports;
+	}
+	
+	
+}
