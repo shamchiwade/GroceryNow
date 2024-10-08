@@ -1,0 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Data</title>
+    <link rel="stylesheet" href="adminStyle.css">
+</head>
+<body>
+    <div class="container">
+        <h1>View Data</h1>
+        <div class="data-table">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

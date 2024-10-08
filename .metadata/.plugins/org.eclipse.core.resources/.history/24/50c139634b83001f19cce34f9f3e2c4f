@@ -1,0 +1,21 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Remove Data</title>
+    <link rel="stylesheet" href="adminStyle.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Remove Data</h1>
+        <div class="remove-data-form">
+            <form action="RemoveDataServlet" method="post">
+                <label for="id">ID:</label>
+                <input type="text" id="id" name="id"><br><br>
+                <input type="submit" value="Remove Data">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

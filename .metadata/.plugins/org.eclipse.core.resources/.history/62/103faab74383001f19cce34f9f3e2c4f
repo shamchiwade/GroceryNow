@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Data</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Update Data</h1>
+        <div class="update-data-form">
+            <form action="UpdateDataServlet" method="post">
+                <label for="id">ID:</label>
+                <input type="text" id="id" name="id"><br><br>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name"><br><br>
+                <label for="price">Price:</label>
+                <input type="text" id="price" name="price"><br><br>
+                <label for="quantity">Quantity:</label>
+                <input type="text" id="quantity" name="quantity"><br><br>
+                <input type="submit" value="Update Data">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

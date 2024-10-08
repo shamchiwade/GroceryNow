@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @SuppressWarnings("serial")
 @WebServlet("/adminlogin")
@@ -39,18 +40,23 @@ public class AdminLogin extends HttpServlet {
 
 					String adminpass = rs.getString("user_password");
 					String adminemail = "asmaayush2018@gmail.com";
+
 					if (adminemail.equals(email) && adminpass.equals(password)) {
-						RequestDispatcher rd = req.getRequestDispatcher("admin.html");
+
+						HttpSession session = req.getSession();
+						session.setAttribute("email", email);
+						session.setAttribute("password", password);
+						
+						RequestDispatcher rd = req.getRequestDispatcher("adminHome.jsp");
 						rd.forward(req, resp);
-					}
-					else {
+					} else {
 						RequestDispatcher rd = req.getRequestDispatcher("adminLogin.jsp");
 						req.setAttribute("error", "Wrong Password");
 						rd.include(req, resp);
 					}
 				} while (rs.next());
 			} else {
-				RequestDispatcher rd = req.getRequestDispatcher("login.jsp");
+				RequestDispatcher rd = req.getRequestDispatcher("adminLogin.jsp");
 				req.setAttribute("error", "Please Register First");
 				rd.include(req, resp);
 			}
@@ -60,4 +66,3 @@ public class AdminLogin extends HttpServlet {
 	}
 
 }
-
