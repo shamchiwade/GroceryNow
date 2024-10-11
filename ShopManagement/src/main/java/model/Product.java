@@ -1,17 +1,27 @@
 package model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Product {
 	@Id
+	@Column(nullable = false)
 	private int id;
+	@Column(nullable = false)
     private String name;
+	@Column(nullable = false)
     private double price;
+	@Column(nullable = false)
     private double quantity;
+	@Column(nullable = false)
     private String quantityUnit;
-    private String category;
+	@Column(nullable = false)
+	@OneToOne
+    private Category category;
+	@Column(nullable = false)
     private String image;
     
     
@@ -65,11 +75,11 @@ public class Product {
 		this.quantityUnit = quantityUnit;
 	}
 
-	public String getCategory() {
+	public Category getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 

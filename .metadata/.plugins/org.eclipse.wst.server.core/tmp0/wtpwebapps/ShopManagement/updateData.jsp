@@ -1,4 +1,10 @@
 
+<%@page import="model.Product"%>
+<%@page import="java.util.List"%>
+<%@page import="javax.persistence.Query"%>
+<%@page import="javax.persistence.EntityManager"%>
+<%@page import="javax.persistence.Persistence"%>
+<%@page import="javax.persistence.EntityManagerFactory"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -6,27 +12,27 @@
 <%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
 
 <%
 String email = (String) session.getAttribute("email");
 String password = (String) session.getAttribute("password");
 
 if (email == null || password == null) {
-    RequestDispatcher rd = request.getRequestDispatcher("adminLogin.jsp");
-    request.setAttribute("error", "Logged Out");
-    rd.forward(request, response);
+	RequestDispatcher rd = request.getRequestDispatcher("adminLogin.jsp");
+	request.setAttribute("error", "Logged Out");
+	rd.forward(request, response);
 } else {
-    try {
-        Class.forName("org.postgresql.Driver");
-        Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/shopkeeper?user=postgres&password=root");
-        PreparedStatement ps = con.prepareStatement("select * from users where user_email=?");
-        ps.setString(1, email);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            String dbPassword = rs.getString("user_password");
-            if (password.equals(dbPassword)) {
-
+	try {
+		Class.forName("org.postgresql.Driver");
+		Connection con = DriverManager
+		.getConnection("jdbc:postgresql://localhost:5432/shopkeeper?user=postgres&password=root");
+		PreparedStatement ps = con.prepareStatement("select * from users where user_email=?");
+		ps.setString(1, email);
+		ResultSet rs = ps.executeQuery();
+		if (rs.next()) {
+	String dbPassword = rs.getString("user_password");
+	if (password.equals(dbPassword)) {
 %>
 <!DOCTYPE html>
 <html>
@@ -81,29 +87,43 @@ body {
 	background-color: #c0392b;
 }
 
-.data-table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-bottom: 20px;
+/* new css for tables */
+.table-container {
+	overflow-x: auto;
 }
 
-.data-table th, .data-table td {
+table {
+	border-collapse: collapse;
+	width: 100%;
+	border: 1px solid #ddd;
+}
+
+th, td {
 	border: 1px solid #ddd;
 	padding: 10px;
 	text-align: left;
 }
 
-.data-table th {
-	background-color: #337ab7;
+th {
+	background-color: #3498db;
 	color: #fff;
+	font-weight: bold;
 }
 
-.data-table tr:nth-child(even) {
+tr:nth-child(even) {
 	background-color: #f9f9f9;
 }
 
-.data-table tr:hover {
+tr:hover {
 	background-color: #f2f2f2;
+}
+
+img {
+	width: 100px;
+	height: 100px;
+	border-radius: 5%;
+	margin: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .update-button {
@@ -149,6 +169,22 @@ body {
 .btn:hover {
 	background-color: #3e8e41;
 }
+
+.success {
+	color: #2ecc71;
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.error {
+	color: #e74c3c;
+	font-size: 16px;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
 </style>
 </head>
 <body>
@@ -158,44 +194,56 @@ body {
 			<p>This page allows you to update data in the database.</p>
 			<a href="logout" class="logout-button">Logout</a>
 		</div>
-		<table class="data-table">
-			<tr>
-				<th>ID</th>
-				<th>Product Name</th>
-				<th>Quantity/Size</th>
-				<th>Price</th>
-				<th>Product Image</th>
-				<th>Update</th>
-			</tr>
-			<tr>
-				<td>1</td>
-				<td>Apple iPhone 13</td>
-				<td>64GB</td>
-				<td>$999.99</td>
-				<td><img src="https://example.com/iphone13.jpg" width="100"
-					height="100"></td>
-				<td><button class="update-button">Update</button></td>
-			</tr>
-			<tr>
-				<td>2</td>
-				<td>Samsung Galaxy S22</td>
-				<td>128GB</td>
-				<td>$899.99</td>
-				<td><img src="https://example.com/galaxys22.jpg" width="100"
-					height="100"></td>
-				<td><button class="update-button">Update</button></td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td>Google Pixel 6</td>
-				<td>256GB</td>
-				<td>$799.99</td>
-				<td><img src="https://example.com/pixel6.jpg" width="100"
-					height="100"></td>
-				<td><button class="update-button">Update</button></td>
-			</tr>
-		</table>
-
+		<h3 class="success">${operation}</h3>
+		<h3 class="error">${error}</h3>
+		<div class="table-container">
+			<table class="data-table">
+				<tr>
+					<th>ID</th>
+					<th>Category</th>
+					<th>Image</th>
+					<th>Name</th>
+					<th>Price</th>
+					<th>Quantity</th>
+					<th>Quantity Unit</th>
+					<th>Update</th>
+				</tr>
+				<%
+				EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop");
+				EntityManager em = emf.createEntityManager();
+				Query query = em.createQuery("select p from Product p");
+				List<Product> productList = query.getResultList();
+				if (productList != null) {
+					for (Product product : productList) {
+				%>
+				<tr>
+					<td><%=product.getId()%></td>
+					<td><%=product.getCategory()%></td>
+					<td><img src="<%=product.getImage()%>" alt="Product Image"></td>
+					<td><%=product.getName()%></td>
+					<td><%=product.getPrice()%></td>
+					<td><%=product.getQuantity()%></td>
+					<td><%=product.getQuantityUnit()%></td>
+					<td>
+					<form action="updateProduct.jsp" method="post">
+							<input type="hidden" name="id" value="<%=product.getId()%>">
+							<input type="hidden" name="category" value="<%=product.getCategory()%>">
+							<input type="hidden" name="image" value="<%=product.getImage()%>">
+							<input type="hidden" name="name" value="<%=product.getName()%>">
+							<input type="hidden" name="price" value="<%=product.getPrice()%>">
+							<input type="hidden" name="quantity" value="<%=product.getQuantity()%>">
+							<input type="hidden" name="quantityunit" value="<%=product.getQuantityUnit()%>">
+							<button class="update-button" type="submit">Update</button>
+						</form>
+					
+					</td>
+				</tr>
+				<%
+				}
+				}
+				%>
+			</table>
+		</div>
 
 		<button class="btn" onclick="location.href='adminHome.jsp'"><%="<"%></button>
 		<button class="btn" onclick="location.href='updateData.jsp'">&#10227;</button>
@@ -208,18 +256,18 @@ body {
 </html>
 
 <%
-            } else {
-                RequestDispatcher rd = request.getRequestDispatcher("adminLogin.jsp");
-                request.setAttribute("error", "Invalid email or password");
-                rd.forward(request, response);
-            }
-        } else {
-            RequestDispatcher rd = request.getRequestDispatcher("adminLogin.jsp");
-            request.setAttribute("error", "Invalid email or password");
-            rd.forward(request, response);
-        }
-    } catch (ClassNotFoundException | SQLException e) {
-        e.printStackTrace();
-    }
+} else {
+RequestDispatcher rd = request.getRequestDispatcher("adminLogin.jsp");
+request.setAttribute("error", "Invalid email or password");
+rd.forward(request, response);
+}
+} else {
+RequestDispatcher rd = request.getRequestDispatcher("adminLogin.jsp");
+request.setAttribute("error", "Invalid email or password");
+rd.forward(request, response);
+}
+} catch (ClassNotFoundException | SQLException e) {
+e.printStackTrace();
+}
 }
 %>

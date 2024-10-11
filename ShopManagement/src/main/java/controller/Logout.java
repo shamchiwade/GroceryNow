@@ -3,13 +3,11 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
+import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
+
+
 
 @WebServlet("/logout")
 public class Logout extends HttpServlet {

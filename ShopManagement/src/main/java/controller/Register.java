@@ -1,8 +1,6 @@
 package controller;
 
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,16 +9,18 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
+import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
+
+
 
 @SuppressWarnings("serial")
 @WebServlet("/register")
 public class Register extends HttpServlet {
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
 			Class.forName("org.postgresql.Driver");
@@ -66,6 +66,9 @@ public class Register extends HttpServlet {
 
 		} catch (ClassNotFoundException | SQLException | NumberFormatException e) {
 			e.printStackTrace();
+			RequestDispatcher rd = req.getRequestDispatcher("register.jsp");
+			req.setAttribute("error", "Email already registered");
+			rd.include(req, resp);
 		} 
 	}
 }

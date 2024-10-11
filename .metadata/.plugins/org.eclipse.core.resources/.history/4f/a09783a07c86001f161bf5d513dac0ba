@@ -1,0 +1,47 @@
+<html>
+<head>
+    <title>Shop Management System - Register</title>
+    <link rel="stylesheet " href="style.css">
+</head>
+<body>
+    <div class="main">
+        <h1>Shop Management System</h1>
+        <h3>Register</h3>
+        <form action="register">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="nm" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="em" required>
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="tel" id="phoneNumber" name="ph" required>
+            
+            <div class="passdiv">            
+            	<label for="password">Password:</label>	
+            	<button class="pass" onclick="showPass('password')" style="width: 20px;">show</button>
+            	<input type="password" id="password" name="ps" required class="pass">
+            </div>
+            
+            <div class="passdiv">            
+            	<label for="confirmPassword">Confirm Password:</label>
+            	<button class="pass" onclick="showPass('password')">show</button>
+            	<input type="password" id="confirmPassword" name="cps" required class="pass">
+            </div>
+            
+            <p style="color: red;">${error}</p>
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="login.jsp">Login</a></p>
+    </div>
+    
+    <script type="text/javascript">
+    function showPass(id) {
+    	  var x = document.getElementById(id);
+    	  if (x.type === "password") {
+    	    x.type = "text";
+    	  } else {
+    	    x.type = "password";
+    	  }
+    	}
+    </script>
+</body>
+</html>

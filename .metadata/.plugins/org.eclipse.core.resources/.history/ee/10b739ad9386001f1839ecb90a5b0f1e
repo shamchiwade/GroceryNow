@@ -1,0 +1,39 @@
+package adminController;
+
+import java.io.IOException;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.Product;
+
+@WebServlet("/removeProduct")
+public class RemoveData extends HttpServlet{
+
+	private static final long serialVersionUID = -666573535773464705L;
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("In remove data java file");
+		
+		int id = Integer.parseInt(req.getParameter("id"));
+        // Remove the product from the database
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop");
+        EntityManager em = emf.createEntityManager();
+        Product product = em.find(Product.class, id);
+        if (product != null) {
+            em.getTransaction().begin();
+            em.remove(product);
+            em.getTransaction().commit();
+        }
+        // Redirect to the remove data page
+        resp.sendRedirect("removeData.jsp");
+	
+	}
+}

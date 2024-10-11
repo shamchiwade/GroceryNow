@@ -1,9 +1,0 @@
-package controller;
-
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.annotation.WebServlet;
-
-@WebServlet("/register")
-public class Register extends HttpServlet {
-
-}

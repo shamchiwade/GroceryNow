@@ -6,14 +6,25 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
 	<display-name>Archetype Created Web Application</display-name>
-
+ <!-- 
 	<servlet>
 		<servlet-name>RegisterServlet</servlet-name>
-		<servlet-class>/ShopManagement/src/main/java/com/store/RegisterServlet.java</servlet-class>
+		<servlet-class>controller.Register</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>RegisterServlet</servlet-name>
 		<url-pattern>/registerServlet</url-pattern>
 	</servlet-mapping>
+	 -->
+	 <!-- 
+	<servlet>
+		<servlet-name>RemoveData</servlet-name>
+		<servlet-class>adminController.RemoveData</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RemoveData</servlet-name>
+		<url-pattern>/removeProduct</url-pattern>
+	</servlet-mapping> 
+	 -->
 	
 </web-app>

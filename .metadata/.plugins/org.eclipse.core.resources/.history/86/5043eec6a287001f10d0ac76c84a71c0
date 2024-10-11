@@ -1,0 +1,424 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<title>GloceryNow - Home</title>
+<style type="text/css">
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #f9f9f9;
+}
+
+.container {
+	max-width: 1200px;
+	margin: 40px auto;
+	padding: 20px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+}
+
+.header {
+	background-color: #337ab7;
+	padding: 10px;
+	border-bottom: 1px solid #ddd;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.header .logo {
+	color: #fff;
+	font-size: 24px;
+	margin: 0;
+}
+
+.header .buttons {
+	display: flex;
+	align-items: center;
+}
+
+.header .buttons button {
+	background-color: #337ab7;
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.2s ease-in-out;
+	border-radius: 5px;
+	margin-left: 10px;
+}
+
+.header .buttons button:hover {
+	background-color: #23527c;
+}
+
+.search-bar {
+	background-color: #f0f0f0;
+	padding: 10px;
+	border-bottom: 1px solid #ddd;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.search-bar input {
+	width: 70%;
+	height: 40px;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+
+.search-bar button {
+	background-color: #337ab7;
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.2s ease-in-out;
+	border-radius: 5px;
+	margin-left: 10px;
+}
+
+.search-bar button:hover {
+	background-color: #23527c;
+}
+
+.categories {
+	background-color: #f0f0f0;
+	padding: 20px;
+	border-bottom: 1px solid #ddd;
+}
+
+.categories .row {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.categories .col-md-3 {
+	width: 25%;
+	margin: 10px;
+}
+
+.categories .card {
+	background-color: #fff;
+	padding: 20px;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s ease-in-out;
+}
+
+.categories .card:hover {
+	transform: scale(1.05);
+}
+
+.categories .card img {
+	width: 100%;
+	height: 200px;
+	object-fit: contain;
+	overflow:hidden;
+	aspect-ratio: auto 225 / 333;
+	vertical-align:top;
+	border-radius: 10px 10px 0 0;
+}
+
+.categories .card h3 {
+	font-weight: bold;
+	margin-top: 10px;
+	text-align: center;
+}
+
+.categories .card p {
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+.trending-products {
+	margin-top: 20px;
+}
+
+.trending-products h2 {
+	margin-top: 0;
+}
+
+.trending-products .row {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.trending-products .col-md-3 {
+	width: 25%;
+	margin: 10px;
+}
+
+.trending-products .card {
+	background-color: #fff;
+	padding: 20px;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s ease-in-out;
+}
+
+.trending-products .card:hover {
+	transform: scale(1.05);
+}
+
+.trending-products .card img {
+	width: 100%;
+	height: 150px;
+	object-fit: cover;
+	border-radius: 10px 10px 0 0;
+}
+
+.trending-products .card h3 {
+	font-weight: bold;
+	margin-top: 10px;
+}
+
+.trending-products .card p {
+	margin-bottom: 10px;
+}
+
+.trending-products .card button {
+	background-color: #337ab7;
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.2s ease-in-out;
+	border -radius: 5px;
+}
+
+.trending-products .card button:hover {
+	background-color: #23527c;
+}
+
+.cart-sidebar {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 300px;
+	height: 100vh;
+	padding: 20px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	box -shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	transform: translateX(100%);
+	transition: transform 0.3s ease-in-out;
+}
+
+.cart-sidebar.open {
+	transform: translateX(0);
+}
+
+.cart-sidebar h2 {
+	margin-top: 0;
+}
+
+.cart-sidebar ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.cart-sidebar li {
+	margin-bottom: 10px;
+}
+
+.cart-sidebar p {
+	margin-bottom: 20px;
+}
+
+.cart-sidebar button {
+	background-color: #337ab7;
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.2s ease-in-out;
+	border-radius: 5px;
+}
+</style>
+</head>
+<body>
+	<div class="header">
+		<h1 class="logo">GloceryNow</h1>
+		<div class="buttons">
+			<button class="cart-button" onclick="toggleCart()">Cart</button>
+			<button class="logout-button" onclick="logout()">Logout</button>
+		</div>
+	</div>
+	<div class="container">
+		<div class="search-bar">
+			<input type="search" placeholder="Search products...">
+			<button>Search</button>
+		</div>
+		<div class="trending-products">
+			<h2>Trending Products</h2>
+			<div class="row">
+				<div class="col-md-3">
+					<div class="card">
+						<img src="images/apple.jpg" alt="Apple">
+						<h3>Apple</h3>
+						<p class="price">Price: $1.99</p>
+						<p class="quantity">Quantity: 1 kg</p>
+						<button class="add-to-cart" onclick="addInCart(this)">Add to Cart</button>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card">
+						<img src="images/banana.jpg" alt="Banana">
+						<h3>Banana</h3>
+						<p class="price">Price: $0.99</p>
+						<p class="quantity">Quantity: 1 kg</p>
+						<button class="add-to-cart" onclick="addInCart(this)">Add to Cart</button>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card">
+						<img src="images/orange.jpg" alt="Orange">
+						<h3>Orange</h3>
+						<p class="price">Price: $1.49</p>
+						<p class="quantity">Quantity: 1 kg</p>
+						<button class="add-to-cart" onclick="addInCart(this)">Add to Cart</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<div class="categories">
+			<h2>Categories</h2>
+			<div class="row">
+				<div class="col-md-3">
+					<div class="card">
+						<img src="https://cdn.zeptonow.com/production///tr:w-210,ar-225-333,pr-true,f-auto,q-80/cms/category/4b28a9a2-8714-455c-ad17-fa765bbc3576.png" alt="Dairy Products">
+						<h3>Dairy Products</h3>
+						<p>Explore our wide range of dairy products</p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card">
+						<img src="images/fruits.jpg" alt="Fruits">
+						<h3>Fruits</h3>
+						<p>Get fresh fruits delivered to your doorstep</p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card">
+						<img src="images/vegetables.jpg" alt="Vegetables">
+						<h3>Vegetables</h3>
+						<p>Explore our wide range of fresh vegetables</p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card">
+						<img src="images/bread.jpg" alt="Bread and baked goods">
+						<h3>Bread and baked goods</h3>
+						<p>Get freshly baked bread and pastries delivered</p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card">
+						<img src="images/meat.jpg" alt="Meat and fish">
+						<h3>Meat and fish</h3>
+						<p>Explore our wide range of meat and fish products</p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card">
+						<img src="images/snacks.jpg" alt="Snacks">
+						<h3>Snacks</h3>
+						<p>Get your favorite snacks delivered to your doorstep</p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card">
+						<img src="images/beverages.jpg" alt="Beverages">
+						<h3>Beverages</h3>
+						<p>Explore our wide range of beverages</p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card">
+						<img src="images/household.jpg" alt="Household">
+						<h3>Household</h3>
+						<p>Get household essentials delivered to your doorstep</p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card">
+						<img src="images/personalcare.jpg" alt="Personal care">
+						<h3>Personal care</h3>
+						<p>Explore our wide range of personal care products</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="cart-sidebar">
+		<h2>Cart</h2>
+		<ul class="cart-list">
+			<!-- Cart items will be added here -->
+		</ul>
+		<p>Total: $0.00</p>
+		<button class="checkout-button">Checkout</button>
+	</div>
+
+	<script>
+		document.querySelectorAll('.categories .card').forEach((card) => {
+			card.addEventListener('mouseover', (event) => {
+				card.style.transform = 'scale(1.05)';
+			});
+			card.addEventListener('mouseout', (event) => {
+				card.style.transform = 'scale(1)';
+			});
+		});
+
+		function toggleCart() {
+			var cartSidebar = document.querySelector('.cart-sidebar');
+			cartSidebar.classList.toggle('open');
+		}
+
+		function addInCart(element) {
+			// Add the product to the cart
+			var product = element.parentNode;
+			var productName = product.querySelector('h3').textContent;
+			var productPrice = product.querySelector('.price').textContent;
+			var productQuantity = product.querySelector('.quantity').textContent;
+			var cartList = document.querySelector('.cart-list');
+			var cartItem = document.createElement('li');
+			cartItem.textContent = `${productName} - ${productPrice} - ${productQuantity}`;
+			cartList.appendChild(cartItem);
+			updateTotal();
+		}
+
+		function updateTotal() {
+			var cartList = document.querySelector('.cart-list');
+			var total = 0;
+			cartList.querySelectorAll('li').forEach((item) => {
+				var price = item.textContent.split(' - ')[1];
+				total += parseFloat(price.replace('$', ''));
+			});
+			document.querySelector('.cart-sidebar p').textContent = `Total: $${total.toFixed(2)}`;
+		}
+
+		function logout() {
+			// Logout functionality goes here
+			alert('You have been logged out!');
+		}
+	</script>
+</body>
+</html>

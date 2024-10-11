@@ -1,5 +1,18 @@
+
+<%@page import="javax.persistence.Query"%>
+<%@page import="javax.persistence.EntityManager"%>
+<%@page import="javax.persistence.Persistence"%>
+<%@page import="javax.persistence.EntityManagerFactory"%>
+<%@page import="model.Product"%>
+<%@page import="java.util.List"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,110 +22,216 @@ body {
 	font-family: Arial, sans-serif;
 	margin: 0;
 	padding: 0;
+	background-color: #f9f9f9;
 }
 
 .container {
 	max-width: 1200px;
 	margin: 40px auto;
 	padding: 20px;
-	background-color: #f9f9f9;
+	background-color: #fff;
 	border: 1px solid #ddd;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	animation: fadeIn 1s;
+}
+
+.header {
+	background-color: #337ab7;
+	padding: 10px;
+	border-bottom: 1px solid #ddd;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	animation: slideIn 1s;
+}
+
+.header .logo {
+	color: #fff;
+	font-size: 24px;
+	margin: 0;
+	animation: bounceIn 1s;
+}
+
+.header .buttons {
+	display: flex;
+	align-items: center;
+}
+
+.header .buttons button {
+	background-color: #337ab7;
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.2s ease-in-out;
+	border-radius: 5px;
+	margin-left: 10px;
+	animation: fadeIn 1s;
+}
+
+.header .buttons button:hover {
+	background-color: #23527c;
+}
+
+.search-bar {
+	background-color: #f0f0f0;
+	padding: 10px;
+	border-bottom: 1px solid #ddd;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	animation: slideIn 1s;
+}
+
+.search-bar input {
+	width: 70%;
+	height: 40px;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	animation: fadeIn 1s;
+}
+
+.search-bar button {
+	background-color: #337ab7;
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.2s ease-in-out;
+	border-radius: 5px;
+	margin-left: 10px;
+	animation: fadeIn 1s;
+}
+
+.search-bar button:hover {
+	background-color: #23527c;
 }
 
 .categories {
 	background-color: #f0f0f0;
 	padding: 20px;
 	border-bottom: 1px solid #ddd;
+	animation: slideIn 1s;
 }
 
-.categories ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-.categories li {
-	display: inline-block;
-	margin-right: 20px;
-}
-
-.categories a {
-	text-decoration: none;
-	color: #337ab7;
-}
-
-.categories a:hover {
-	color: #23527c;
-}
-
-.products {
-	margin-top: 20px;
-}
-
-.row {
+.categories .row {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 }
 
-.col-md-3 {
+.categories .col-md-3 {
 	width: 25%;
 	margin: 10px;
 }
 
-.card {
+.categories .card {
 	background-color: #fff;
 	padding: 20px;
 	border: 1px solid #ddd;
 	border-radius: 10px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s ease-in-out;
+	animation: fadeIn 1s;
 }
 
-.card img {
-	width: 100%;
-	height: 150px;
+.categories .card:hover {
+	transform: scale(1.05);
+}
+
+.categories .card img {
 	object-fit: cover;
-	border-radius: 10px 10px 0 0;
+	object-position: 100% 0;
+	width: 100%;
+	height: 230px;
+	animation: zoomIn 1s;
 }
 
-.card h3 {
+.categories .card h3 {
 	font-weight: bold;
 	margin-top: 10px;
+	text-align: center;
+	animation: fadeIn 1s;
 }
 
-.card p {
+.categories .card p {
 	margin-bottom: 10px;
+	text-align: center;
+	animation: fadeIn 1s;
 }
 
-.card button {
+.trending-products {
+	margin-top: 20px;
+	animation: slideIn 1s;
+}
+
+.trending-products h2 {
+	margin-top: 0;
+	animation: fadeIn 1s;
+}
+
+.trending-products .row {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.trending-products .col-md-3 {
+	width: 25%;
+	margin: 10px;
+}
+
+.trending-products .card {
+	background-color: #fff;
+	padding: 20px;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s ease-in-out;
+	animation: fadeIn 1s;
+}
+
+.trending-products .card:hover {
+	transform: scale(1.05);
+}
+
+.trending-products .card img {
+	width: 100%;
+	height: 150px;
+	object-fit: contain;
+	border-radius: 10px 10px 0 0;
+	animation: zoomIn 1s;
+}
+
+.trending-products .card h3 {
+	font-weight: bold;
+	margin-top: 10px;
+	animation: fadeIn 1s;
+}
+
+.trending-products .card p {
+	margin-bottom: 10px;
+	animation: fadeIn 1s;
+}
+
+.trending-products .card button {
 	background-color: #337ab7;
 	color: #fff;
 	border: none;
 	padding: 10px 20px;
 	font-size: 16px;
 	cursor: pointer;
+	transition: background-color 0.2s ease-in-out;
+	border-radius: 5px;
+	margin-top: 10px;
+	animation: fadeIn 1s;
 }
 
-.card button:hover {
-	background-color: #23527c;
-}
-
-.cart-button {
-	position: fixed;
-	top: 20px;
-	right: 20px;
-	z-index: 1;
-	background-color: #337ab7;
-	color: #fff;
-	border: none;
-	padding: 10px 20px;
-	font-size: 16px;
-	cursor: pointer;
-	background-color: #337ab7
-}
-
-.cart-button:hover {
+.trending-products .card button:hover {
 	background-color: #23527c;
 }
 
@@ -128,268 +247,273 @@ body {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	transform: translateX(100%);
 	transition: transform 0.3s ease-in-out;
-	background-color: #fff;
+	animation: slideIn 1s;
 }
 
 .cart-sidebar.open {
-	transform: translateX(0);
+	transform: translate X(0);
 }
 
-.categories {
-	background-color: #f7f7f7;
-	padding: 20px;
-	border-bottom: 1px solid #ccc;
+.cart-sidebar h2 {
+	margin-top: 0;
+	animation: fadeIn 1s;
 }
 
-.categories ul {
+.cart-sidebar ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-.categories li {
-	display: inline-block;
-	margin-right: 20px;
+.cart-sidebar li {
+	margin-bottom: 10px;
+	animation: fadeIn 1s;
 }
 
-.categories a {
-	text-decoration: none;
-	color: #337ab7;
+.cart-sidebar p {
+	margin-bottom: 20px;
+	animation: fadeIn 1s;
 }
 
-.categories a:hover {
-	color: #23527c;
+.cart-sidebar button {
+	background-color: #337ab7;
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.2s ease-in-out;
+	border-radius: 5px;
+	margin-left: 10px;
+	animation: fadeIn 1s;
 }
 
-.categories a.active {
-	color: #23527c;
-	border-bottom: 2px solid #337ab7;
+@
+keyframes fadeIn {from { opacity:0;
+	
+}
+
+to {
+	opacity: 1;
+}
+
+}
+@
+keyframes slideIn {from { transform:translateX(-100%);
+	
+}
+
+to {
+	transform: translateX(0);
+}
+
+}
+@
+keyframes bounceIn {from { transform:scale(0.5);
+	
+}
+
+to {
+	transform: scale(1);
+}
+
+}
+@
+keyframes zoomIn {from { transform:scale(0.5);
+	
+}
+
+to {
+	transform: scale(1);
+}
 }
 </style>
 </head>
 <body>
-	<div class="container">
-		<h1>GloceryNow - Home</h1>
-		<div class="categories">
-			<h2>Categories</h2>
-			<ul>
-				<li><a href="#fruits">Fruits</a></li>
-				<li><a href="#vegetables">Vegetables</a></li>
-				<li><a href="#dairy">Dairy</a></li>
-				<li><a href="#meat">Meat</a></li>
-				<li><a href="#poultry">Poultry</a></li>
-			</ul>
-		</div>
-		<div class="products">
-			<h2 id="fruits">Fruits</h2>
-			<div class="row">
-				<div class="col-md-3">
-					<div class="card">
-						<img src="images/apple.jpg" alt="Apple">
-						<h3>Apple</h3>
-						<p class="price">Price: $1.99</p>
-						<p class="quantity">Quantity: 1 kg</p>
-						<p>Category: Fruits</p>
-						<button class="add-to-cart" onclick="addInCart(this)">Add
-							to Cart</button>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="card">
-						<img src="images/banana.jpg" alt="Banana">
-						<h3>Banana</h3>
-						<p class="price">Price: $0.99</p>
-						<p class="quantity">Quantity: 1 kg</p>
-						<p>Category: Fruits</p>
-						<button class="add-to-cart" onclick="addInCart(this)">Add
-							to Cart</button>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="card">
-						<img src="images/orange.jpg" alt="Orange">
-						<h3>Orange</h3>
-						<p class="price">Price: $1.49</p>
-						<p class="quantity">Quantity: 1 kg</p>
-						<p>Category: Fruits</p>
-						<button class="add-to-cart" onclick="addInCart(this)">Add
-							to Cart</button>
-					</div>
-				</div>
-			</div>
-			<h2 id="vegetables">Vegetables</h2>
-			<div class="row">
-				<div class="col-md-3">
-					<div class="card">
-						<img src="images/carrot.jpg" alt="Carrot">
-						<h3>Carrot</h3>
-						<p class="price">Price: $1.49</p>
-						<p class="quantity">Quantity: 1 kg</p>
-						<p>Category: Vegetables</p>
-						<button class="add-to-cart" onclick="addInCart(this)">Add
-							to Cart</button>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="card">
-						<img src="images/broccoli.jpg" alt="Broccoli">
-						<h3>Broccoli</h3>
-						<p class="price">Price: $1.99</p>
-						<p class="quantity">Quantity: 1 kg</p>
-						<p>Category: Vegetables</p>
-						<button class="add-to-cart" onclick="addInCart(this)">Add
-							to Cart</button>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="card">
-						<img src="images/cauliflower.jpg" alt="Cauliflower">
-						<h3>Cauliflower</h3>
-						<p class="price">Price: $1.99</p>
-						<p class="quantity">Quantity: 1 kg</p>
-						<p>Category: Vegetables</p>
-						<button class="add-to-cart" onclick="addInCart(this)">Add
-							to Cart</button>
-					</div>
-				</div>
-			</div>
-			<h2 id="dairy">Dairy</h2>
-			<div class="row">
-				<div class="col-md-3">
-					<div class="card">
-						<img src="images/milk.jpg " alt="Milk">
-						<h3>Milk</h3>
-						<p class="price">Price: $2.99</p>
-						<p class="quantity">Quantity: 1 liter</p>
-						<p>Category: Dairy</p>
-						<button class="add-to-cart" onclick="addInCart(this)">Add
-							to Cart</button>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="card">
-						<img src="images/cheese.jpg" alt="Cheese">
-						<h3>Cheese</h3>
-						<p class="price">Price: $3.99</p>
-						<p class="quantity">Quantity: 1 kg</p>
-						<p>Category: Dairy</p>
-						<button class="add-to-cart" onclick="addInCart(this)">Add
-							to Cart</button>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="card">
-						<img src="images/yogurt.jpg" alt="Yogurt">
-						<h3>Yogurt</h3>
-						<p class="price">Price: $2.99</p>
-						<p class="quantity">Quantity: 1 kg</p>
-						<p>Category: Dairy</p>
-						<button class="add-to-cart" onclick="addInCart(this)">Add
-							to Cart</button>
-					</div>
-				</div>
-			</div>
-			<h2 id="meat">Meat</h2>
-			<div class="row">
-				<div class="col-md-3">
-					<div class="card">
-						<img src="images/chicken.jpg" alt="Chicken">
-						<h3>Chicken</h3>
-						<p class="price">Price: $3.99</p>
-						<p class="quantity">Quantity: 1 kg</p>
-						<p>Category: Meat</p>
-						<button class="add-to-cart" onclick="addInCart(this)">Add
-							to Cart</button>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="card">
-						<img src="images/beef.jpg" alt="Beef">
-						<h3>Beef</h3>
-						<p class="price">Price: $4.99</p>
-						<p class="quantity">Quantity: 1 kg</p>
-						<p>Category: Meat</p>
-						<button class="add-to-cart" onclick="addInCart(this)">Add
-							to Cart</button>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="card">
-						<img src="images/pork.jpg" alt="Pork">
-						<h3>Pork</h3>
-						<p class="price">Price: $3.99</p>
-						<p class="quantity">Quantity: 1 kg</p>
-						<p>Category: Meat</p>
-						<button class="add-to-cart" onclick="addInCart(this)">Add
-							to Cart</button>
-					</div>
-				</div>
-			</div>
-			<h2 id="poultry">Poultry</h2>
-			<div class="row">
-				<div class="col-md-3">
-					<div class="card">
-						<img src="images/turkey.jpg" alt="Turkey">
-						<h3>Turkey</h3>
-						<p class="price">Price: $4.99</p>
-						<p class="quantity">Quantity: 1 kg</p>
-						<p>Category: Poultry</p>
-						<button class="add-to-cart" onclick="addInCart(this)">Add
-							to Cart</button>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="card">
-						<img src="images/duck.jpg" alt="Duck">
-						<h3>Duck</h3>
-						<p class="price">Price: $4.99</p>
-						<p class="quantity">Quantity: 1 kg</p>
-						<p>Category: Poultry</p>
-						<button class="add-to-cart" onclick="addInCart(this)">Add
-							to Cart</button>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="card">
-						<img src="images/goose.jpg" alt="Goose">
-						<h3>Goose</h3>
-						<p class="price">Price: $4.99</p>
-						<p class="quantity">Quantity: 1 kg</p>
-						<p>Category: Poultry</p>
-						<button class="add-to-cart" onclick="addInCart(this)">Add
-							to Cart</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<button class="cart-button" onclick="toggleCart()">Cart</button>
-		<div class="cart-sidebar">
-			<h2>Cart</h2>
-			<ul class="cart-list">
-				<!-- Cart items will be added here -->
-			</ul>
-			<p>Total: $0.00</p>
-			<button class="checkout-button">Checkout</button>
+	<div class="header">
+		<h1 class="logo">GloceryNow</h1>
+		<div class="buttons">
+			<button class="cart-button" onclick="toggleCart()">Cart</button>
+			<form action="logout" method="get">
+				<button class="logout-button" type="submit">Logout</button>
+			</form>
 		</div>
 	</div>
+	<div class="container">
+		<div class="search-bar">
+			<input type="search" placeholder="Search products...">
+			<button>Search</button>
+		</div>
+		<div class="trending-products">
+			<h2>Trending Products</h2>
+			<div class="row">
+				<%
+				EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop");
+				EntityManager em = emf.createEntityManager();
+				Query query = em.createQuery("select p from Product p");
+				List<Product> productList = query.getResultList();
+				if (productList != null) {
+					for (Product product : productList) {
+				%>
+				<div class="col-md-3">
+					<div class="card">
+						<img src="<%=product.getImage()%>" alt="product">
+						<h3><%=product.getName()%></h3>
+						<p class="price">
+							Price: ‍₹<%=product.getPrice()%></p>
+						<p class="quantity">
+							Quantity:
+							<%=product.getQuantity()%>
+							<%=product.getQuantityUnit()%></p>
+						<button class="add-to-cart" onclick="addInCart(this)">Add
+							to Cart</button>
+					</div>
+				</div>
+				<%
+				}
+				}
+				%>
+			</div>
+		</div>
 
+		<div class="categories">
+			<h2>Categories</h2>
+			<div class="row">
+				<div class="col-md-3">
+					<div class="card">
+						<img
+							src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-2_10.png"
+							alt="Dairy, Bread & Eggs">
+						<h3>Dairy, Bread & Eggs</h3>
+						<p>Explore our wide range of dairy products</p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card">
+						<img
+							src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-3_9.png"
+							alt="Fruits & Vegetables">
+						<h3>Fruits & Vegetables</h3>
+						<p>Get fresh fruits delivered to your doorstep</p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class=" card">
+						<img
+							src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-4_9.png"
+							alt="Cold Drinks & Juices">
+						<h3>Cold Drinks & Juices</h3>
+						<p>Explore our wide range of fresh vegetables</p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card">
+						<img
+							src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-5_4.png"
+							alt="Snacks & Munchies">
+						<h3>Snacks & Munchies</h3>
+						<p>Get freshly baked bread and pastries delivered</p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card">
+						<img
+							src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-6_5.png"
+							alt="Breakfast & Instant Food">
+						<h3>Breakfast & Instant Food</h3>
+						<p>Explore our wide range of meat and fish products</p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card">
+						<img
+							src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-7_3.png"
+							alt="Sweets">
+						<h3>Sweets</h3>
+						<p>Get your favorite snacks delivered to your doorstep</p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card">
+						<img
+							src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-8_4.png"
+							alt="Biscuits & Bakery">
+						<h3>Biscuits & Bakery</h3>
+						<p>Explore our wide range of beverages</p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card">
+						<img
+							src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-17.png"
+							alt="Cleaning Essentials">
+						<h3>Cleaning Essentials</h3>
+						<p>Get household essentials delivered to your doorstep</p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card">
+						<img
+							src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-19.png"
+							alt="Personal care">
+						<h3>Personal care</h3>
+						<p>Explore our wide range of personal care products</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="cart-sidebar">
+		<h2>Cart</h2>
+		<ul class="cart-list">
+			<!-- Cart items will be added here -->
+		</ul>
+		<p>Total: $0.00</p>
+		<button class="checkout-button">Checkout</button>
+	</div>
 
 	<script>
-    
-    document.querySelectorAll('.categories a').forEach((link) => {
-        link.addEventListener('click', (event) => {
-            event.preventDefault();
-            let sectionId = link.getAttribute('href');
-            let section = document.querySelector(sectionId);
-            section.scrollIntoView({ behavior: 'smooth' });
-        });
-    });
+		document.querySelectorAll('.categories .card').forEach((card) => {
+			card.addEventListener('mouseover', (event) => {
+				card.style.transform = 'scale(1.05)';
+			});
+			card.addEventListener('mouseout', (event) => {
+				card.style.transform = 'scale(1)';
+			});
+		});
 
-    function toggleCart() {
-        var cartSidebar = document.querySelector('.cart-sidebar');
-        cartSidebar.classList.toggle('open');
-    }
+		function toggleCart() {
+			var cartSidebar = document.querySelector('.cart-sidebar');
+			cartSidebar.classList.toggle('open');
+		}
 
-    </script>
+		function addInCart(element) {
+			// Add the product to the cart
+			var product = element.parentNode;
+			var productName = product.querySelector('h3').textContent;
+			var productPrice = product.querySelector('.price').textContent;
+			var productQuantity = product.querySelector('.quantity').textContent;
+			var cartList = document.querySelector('.cart-list');
+			var cartItem = document.createElement('li');
+			cart Item.textContent = `${productName} - ${productPrice} - ${productQuantity}`;
+			cartList.appendChild(cartItem);
+			updateTotal();
+		}
+
+		function updateTotal() {
+			var cartList = document.querySelector('.cart-list');
+			var total = 0;
+			cartList.querySelectorAll('li').forEach((item) => {
+				var price = item.textContent.split(' - ')[1];
+				total += parseFloat(price.replace('$', ''));
+			});
+			document.querySelector('.cart-sidebar p').textContent = `Total: $${total.toFixed(2)}`;
+		}
+
+		function logout() {
+			// Logout functionality goes here
+			alert('You have been logged out!');
+		}
+	</script>
 </body>
 </html>
