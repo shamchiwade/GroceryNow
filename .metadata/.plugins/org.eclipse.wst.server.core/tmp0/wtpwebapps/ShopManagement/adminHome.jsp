@@ -156,28 +156,29 @@ body {
 		</div>
 		<div class="card-container">
 			<div class="card">
-				<h2>View All Data</h2>
-				<p>View all data in the database, including user information and
-					transaction history.</p>
-				<a href="viewData.jsp" class="btn">View All Data</a>
+				<h2>View All Products</h2>
+				<p>View all products in the database, including product information and transaction history.</p>
+				<a href="viewData.jsp" class="btn">View All Products</a>
 			</div>
 			<div class="card">
-				<h2>Add New Data</h2>
-				<p>Add new data to the database, including user information and
-					transaction history.</p>
-				<a href="addData.jsp" class="btn">Add New Data</a>
+				<h2>Add New Product</h2>
+				<p>Add new product to the database, including product information and transaction history.</p>
+				<a href="addData.jsp" class="btn">Add New Product</a>
 			</div>
 			<div class="card">
-				<h2>Remove Data</h2>
-				<p>Remove data from the database, including user information and
-					transaction history.</p>
-				<a href="removeData.jsp" class="btn">Remove Data</a>
+				<h2>Remove Product</h2>
+				<p>Remove product from the database, including product information and transaction history.</p>
+				<a href="removeData.jsp" class="btn">Remove Product</a>
 			</div>
 			<div class="card">
-				<h2>Update Data</h2>
-				<p>Update data in the database, including user information and
-					transaction history.</p>
-				<a href="updateData.jsp" class="btn">Update Data</a>
+				<h2>Update Product</h2>
+				<p>Update product in the database, including product information and transaction history.</p>
+				<a href="updateData.jsp" class="btn">Update Product</a>
+			</div>
+			<div class="card">
+				<h2>Category Management</h2>
+				<p>Manage categories, including adding, removing, and updating categories.</p>
+				<a href="categoryManagement.jsp" class="btn">Category Management</a>
 			</div>
 		</div>
 		<div class="admin-footer">

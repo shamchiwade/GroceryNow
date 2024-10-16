@@ -18,6 +18,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Category;
 import model.Product;
 
 @WebServlet("/updateProduct")
@@ -32,15 +33,15 @@ public class UpdateProduct extends HttpServlet {
 			int quantity = Integer.parseInt(req.getParameter("quantity"));
 			String quantityUnit = req.getParameter("quantityunit");
 			double price = Double.parseDouble(req.getParameter("price"));
-			String category = req.getParameter("category");
+			String categoryname = req.getParameter("category");
 			String productImage = req.getParameter("image");
 
-			System.out.println(productName + " " + quantity + " " + quantityUnit + " " + price + " " + category + " "
-					+ productImage);
+			System.out.println(productName + " " + quantity + " " + quantityUnit + " " + price + " " + categoryname
+					+ " " + productImage);
 
 			RequestDispatcher rd = req.getRequestDispatcher("updateData.jsp");
 
-			if (productName.isEmpty() || productImage.isEmpty() || category.isEmpty()
+			if (productName.isEmpty() || productImage.isEmpty() || categoryname.isEmpty()
 					|| Integer.toString(quantity).isBlank() || Double.toString(price).isBlank()) {
 				req.setAttribute("error", "Please Fill The Fields");
 			} else {
@@ -71,9 +72,9 @@ public class UpdateProduct extends HttpServlet {
 						EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop");
 						EntityManager em = emf.createEntityManager();
 						EntityTransaction et = em.getTransaction();
-						
-						int id = Integer.parseInt(req.getParameter("id"));
 
+						int id = Integer.parseInt(req.getParameter("id"));
+						Category category = em.find(Category.class, categoryname);
 						Product product = em.find(Product.class, id);
 						product.setName(productName);
 						product.setPrice(price);

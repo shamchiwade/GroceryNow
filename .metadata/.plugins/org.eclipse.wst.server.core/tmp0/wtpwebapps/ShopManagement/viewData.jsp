@@ -88,7 +88,6 @@ body {
 	background-color: #c0392b;
 }
 
-
 /* new css for tables */
 .table-container {
 	overflow-x: auto;
@@ -124,7 +123,7 @@ img {
 	width: 100px;
 	height: 100px;
 	border-radius: 5%;
-	margin: 10px;
+	/* margin: 10px; */
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -161,11 +160,17 @@ img {
 <body>
 	<div class="admin-container">
 		<div class="admin-header">
-			<h1>View Data</h1>
-			<p>This page displays all data in the database.</p>
+			<h1>View Product</h1>
+			<p>This page displays all product in the database.</p>
 			<a href="logout" class="logout-button">Logout</a>
+
+
+			
+
 		</div>
 		<div class="table-container">
+		<button class="btn" onclick="location.href='adminHome.jsp'"><%="<"%></button>
+			<button class="btn" onclick="location.href='viewData.jsp'">&#10227;</button>
 			<table>
 				<tr>
 					<th>ID</th>
@@ -186,7 +191,14 @@ img {
 				%>
 				<tr>
 					<td><%=product.getId()%></td>
-					<td><%=product.getCategory()%></td>
+					<%
+					try {
+					%>
+					<td><%=product.getCategory().getName()%></td>
+					<%
+					} catch (NullPointerException npe) {
+					}
+					%>
 					<td><img src="<%=product.getImage()%>" alt="Product Image"></td>
 					<td><%=product.getName()%></td>
 					<td><%=product.getPrice()%></td>
@@ -201,9 +213,6 @@ img {
 		</div>
 
 
-
-		<button class="btn" onclick="location.href='adminHome.jsp'"><%="<"%></button>
-		<button class="btn" onclick="location.href='viewData.jsp'">&#10227;</button>
 
 		<div class="admin-footer">
 			<p>Made With ❤ &copy; 2024 GloceryNow</p>

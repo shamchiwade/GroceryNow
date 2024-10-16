@@ -1,4 +1,10 @@
 
+<%@page import="model.Category"%>
+<%@page import="java.util.List"%>
+<%@page import="javax.persistence.Query"%>
+<%@page import="javax.persistence.EntityManager"%>
+<%@page import="javax.persistence.Persistence"%>
+<%@page import="javax.persistence.EntityManagerFactory"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -218,9 +224,13 @@ body {
 <body>
 	<div class="admin-container">
 		<div class="admin-header">
-			<h1>Add Data</h1>
-			<p>This page allows you to add new data to the database.</p>
+			<h1>Add Product</h1>
+			<p>This page allows you to add new product to the database.</p>
 			<a href="logout" class="logout-button">Logout</a>
+		</div>
+		<div class="nav-btn">
+			<button class="btn" onclick="location.href='adminHome.jsp'"><%="<"%></button>
+			<button class="btn" onclick="location.href='addData.jsp'">&#10227;</button>
 		</div>
 		<h3 class="success">${operation}</h3>
 		<h3 class="error">${error}</h3>
@@ -233,31 +243,35 @@ body {
 					class="form-label">Quantity Unit:</label> <select
 					name="quantity-unit" class="unit-select">
 					<option value="items">Items</option>
-					<option value="kg">Kilograms</option>
-					<option value="ltr">Litres</option>
-					<option value="grams">Grams</option>
-					<option value="ml">Milliliters</option>
+					<option value="pieces">pieces</option>
+					<option value="kg">kilograms</option>
+					<option value="ltr">litres</option>
+					<option value="grams">grams</option>
+					<option value="ml">milliliters</option>
 				</select> <label class="form-label">Price:</label> <input type="number"
 					name="price" class="form-input"> <label class="form-label">Category:</label>
 				<select id="category" name="category" class="category-select">
-					<option value="Dairy">Dairy Products</option>
-					<option value="Fruits">Fruits</option>
-					<option value="Vegetables">Vegetables</option>
-					<option value="Bakery">Bread and baked goods</option>
-					<option value="Meat&Fish">Meat and fish</option>
-					<option value="Snacks">Snacks</option>
-					<option value="Beverages">Beverages</option>
-					<option value="Household">Household</option>
-					<option value="PersonalCare">Personal care</option>
+
+					<%
+					EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop");
+					EntityManager em = emf.createEntityManager();
+					Query query = em.createQuery("select c from Category c");
+					List<Category> categoryList = query.getResultList();
+					if (categoryList != null) {
+						for (Category category : categoryList) {
+					%>
+					<option value="<%=category.getName()%>"><%=category.getName()%></option>
+					<%
+					}
+					}
+					%>
+
 				</select> <label class="form-label">Product Image:</label> <input type="url"
 					name="productImage" class="form-input">
 				<button type="submit" class="form-button">Add Data</button>
 			</form>
 		</div>
-		<div class="nav-btn">
-			<button class="btn" onclick="location.href='adminHome.jsp'"><%="<"%></button>
-			<button class="btn" onclick="location.href='addData.jsp'">&#10227;</button>
-		</div>
+
 
 
 		<div class="admin-footer">

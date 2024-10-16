@@ -8,17 +8,12 @@ import javax.persistence.Id;
 
 @Entity
 public class Category {
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+
 	@Id
 	@Column(nullable = false)
 	private String name;
 	@Column(nullable = false)
 	private String image;
-	
-	public int getId() {
-		return id;
-	}
 	
 	public String getName() {
 		return name;

@@ -184,19 +184,21 @@ img {
 	margin-bottom: 10px;
 	text-align: center;
 }
-
 </style>
 </head>
 <body>
 	<div class="admin-container">
 		<div class="admin-header">
-			<h1>Update Data</h1>
-			<p>This page allows you to update data in the database.</p>
+			<h1>Update Product</h1>
+			<p>This page allows you to update product in the database.</p>
 			<a href="logout" class="logout-button">Logout</a>
 		</div>
 		<h3 class="success">${operation}</h3>
 		<h3 class="error">${error}</h3>
 		<div class="table-container">
+
+			<button class="btn" onclick="location.href='adminHome.jsp'"><%="<"%></button>
+			<button class="btn" onclick="location.href='updateData.jsp'">&#10227;</button>
 			<table class="data-table">
 				<tr>
 					<th>ID</th>
@@ -217,26 +219,40 @@ img {
 					for (Product product : productList) {
 				%>
 				<tr>
-					<td><%=product.getId()%></td>
-					<td><%=product.getCategory()%></td>
-					<td><img src="<%=product.getImage()%>" alt="Product Image"></td>
-					<td><%=product.getName()%></td>
-					<td><%=product.getPrice()%></td>
-					<td><%=product.getQuantity()%></td>
-					<td><%=product.getQuantityUnit()%></td>
+					<%
+					int id = product.getId();
+					String productName = product.getName();
+					double quantity = product.getQuantity();
+					String quantityUnit = product.getQuantityUnit();
+					double price = product.getPrice();
+					String categoryName = null;
+					try {
+						categoryName = product.getCategory().getName();
+					} catch (NullPointerException npe) {
+					}
+					String productImage = product.getImage();
+					%>
+					<td><%=id%></td>
+					<td><%=categoryName%></td>
+					<td><img src="<%=productImage%>" alt="Product Image"></td>
+					<td><%=productName%></td>
+					<td><%=price%></td>
+					<td><%=quantity%></td>
+					<td><%=quantityUnit%></td>
 					<td>
-					<form action="updateProduct.jsp" method="post">
-							<input type="hidden" name="id" value="<%=product.getId()%>">
-							<input type="hidden" name="category" value="<%=product.getCategory()%>">
-							<input type="hidden" name="image" value="<%=product.getImage()%>">
-							<input type="hidden" name="name" value="<%=product.getName()%>">
-							<input type="hidden" name="price" value="<%=product.getPrice()%>">
-							<input type="hidden" name="quantity" value="<%=product.getQuantity()%>">
-							<input type="hidden" name="quantityunit" value="<%=product.getQuantityUnit()%>">
+						<form action="updateProduct.jsp" method="post">
+							<input type="hidden" name="id" value="<%=id%>"> <input
+								type="hidden" name="category" value="<%=categoryName%>">
+							<input type="hidden" name="imageurl" value="<%=productImage%>">
+							<input type="hidden" name="name" value="<%=productName%>">
+							<input type="hidden" name="price" value="<%=price%>"> <input
+								type="hidden" name="quantity" value="<%=quantity%>"> <input
+								type="hidden" name="quantityunit" value="<%=quantityUnit%>">
 							<button class="update-button" type="submit">Update</button>
 						</form>
-					
+
 					</td>
+
 				</tr>
 				<%
 				}
@@ -245,8 +261,6 @@ img {
 			</table>
 		</div>
 
-		<button class="btn" onclick="location.href='adminHome.jsp'"><%="<"%></button>
-		<button class="btn" onclick="location.href='updateData.jsp'">&#10227;</button>
 
 		<div class="admin-footer">
 			<p>Made With ❤ &copy; 2024 GloceryNow</p>

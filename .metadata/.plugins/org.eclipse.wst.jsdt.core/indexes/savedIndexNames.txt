@@ -1,8 +1,8 @@
-INDEX VERSION 1.4+C:\Users\AAYUSH\Desktop\Projects\GloceryNow\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-545557123.index
-290424626.index
-1560605994.index
-3998731024.index
-3391518537.index
+INDEX VERSION 1.4+C:\Users\AAYUSH\Desktop\Projects\GroceryNow\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
 274265639.index
 2707347856.index
+2616888407.index
+3796631248.index
+3534586869.index
+352269622.index
+344318356.index

@@ -18,7 +18,6 @@ public class Product {
     private double quantity;
 	@Column(nullable = false)
     private String quantityUnit;
-	@Column(nullable = false)
 	@OneToOne
     private Category category;
 	@Column(nullable = false)

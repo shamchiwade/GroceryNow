@@ -24,6 +24,7 @@ public class RemoveProduct extends HttpServlet {
         EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();
         Product product = em.find(Product.class, id);
+        
         if (product != null) {
             et.begin();
             em.remove(product);

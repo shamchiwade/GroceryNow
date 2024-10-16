@@ -1,4 +1,10 @@
 
+<%@page import="model.Category"%>
+<%@page import="java.util.List"%>
+<%@page import="javax.persistence.Query"%>
+<%@page import="javax.persistence.EntityManager"%>
+<%@page import="javax.persistence.Persistence"%>
+<%@page import="javax.persistence.EntityManagerFactory"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -32,7 +38,7 @@ if (email == null || password == null) {
 <!DOCTYPE html>
 <html>
 <head>
-<title>Add Data</title>
+<title>Update Data</title>
 <style>
 body {
 	font-family: Arial, sans-serif;
@@ -225,41 +231,62 @@ body {
 		<h3 class="success">${operation}</h3>
 		<h3 class="error">${error}</h3>
 		<div class="form-container">
-		<%
-		int id = Integer.parseInt(request.getParameter("id"));
-		String productName = request.getParameter("name");
-		int quantity =(int) Double.parseDouble(request.getParameter("quantity"));
-		String quantityUnit = request.getParameter("quantityunit");
-		double price = Double.parseDouble(request.getParameter("price"));
-		String category = request.getParameter("category");
-		String productImage = request.getParameter("image");
-		%>
+			<%
+			int id = Integer.parseInt(request.getParameter("id"));
+			String productName = request.getParameter("name");
+			int quantity = (int) Double.parseDouble(request.getParameter("quantity"));
+			String quantityUnit = request.getParameter("quantityunit");
+			double price = Double.parseDouble(request.getParameter("price"));
+			String categoryName = request.getParameter("category");
+			String prodImage = request.getParameter("imageurl");
+
+			System.out.println("Product Image Parameter: " + prodImage);
+
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop");
+			EntityManager em = emf.createEntityManager();
+
+			Category categoryOfProduct = em.find(Category.class, categoryName);
+			%>
 			<form action="updateProduct" method="post">
-				<label class="form-label">Product Id:</label><input type="text"	name="id" class="form-input" value="<%=id%>">
-				<label class="form-label">Product Name:</label> <input type="text" name="name" class="form-input" value="<%=productName%>"> 
-				<label class="form-label">Quantity/Size:</label> <input type="number" name="quantity" class="form-input" value="<%=quantity%>" > 
-				<label class="form-label">Quantity Unit:</label> <select name="quantityunit" class="unit-select" >					
+				<label class="form-label">Product Id:</label><input type="text"
+					name="id" class="form-input" value="<%=id%>"> <label
+					class="form-label">Product Name:</label> <input type="text"
+					name="name" class="form-input" value="<%=productName%>"> <label
+					class="form-label">Quantity/Size:</label> <input type="number"
+					name="quantity" class="form-input" value="<%=quantity%>"> <label
+					class="form-label">Quantity Unit:</label> <select
+					name="quantityunit" class="unit-select">
 					<option value="<%=quantityUnit%>"><%=quantityUnit%></option>
 					<option value="items">Items</option>
 					<option value="kg">Kilograms</option>
 					<option value="ltr">Litres</option>
 					<option value="grams">Grams</option>
 					<option value="ml">Milliliters</option>
+				</select> <label class="form-label">Price:</label> <input type="number"
+					name="price" class="form-input" value="<%=price%>"> <label
+					class="form-label">Category:</label> <select id="category"
+					name="category" class="category-select">
+					<%
+					try {
+					%>
+					<option value="<%=categoryOfProduct.getName()%>"><%=categoryOfProduct.getName()%></option>
+					<%
+					} catch (NullPointerException npe) {
+					}
+					%>
+					<%
+					Query query = em.createQuery("select c from Category c");
+					List<Category> categoryList = query.getResultList();
+					if (categoryList != null) {
+						for (Category category : categoryList) {
+					%>
+					<option value="<%=category.getName()%>"><%=category.getName()%></option>
+					<%
+					}
+					}
+					%>
 				</select> 
-				<label class="form-label">Price:</label> <input type="number" name="price" class="form-input" value="<%=price%>"> 
-				<label class="form-label">Category:</label>	<select id="category" name="category" class="category-select">				
-					<option value="<%=category%>"><%=category%></option>
-					<option value="Dairy">Dairy Products</option>
-					<option value="Fruits">Fruits</option>
-					<option value="Vegetables">Vegetables</option>
-					<option value="Bakery">Bread and baked goods</option>
-					<option value="Meat&Fish">Meat and fish</option>
-					<option value="Snacks">Snacks</option>
-					<option value="Beverages">Beverages</option>
-					<option value="Household">Household</option>
-					<option value="PersonalCare">Personal care</option>
-				</select> 
-				<label class="form-label">Product Image:</label> <input type="url" name="image" class="form-input" value="<%=productImage%>"> 
+				<label class="form-label">Product Image:</label> <input type="url" name="image" class="form-input" value="<%=prodImage%>">
 				<button type="submit" class="form-button">Update Data</button>
 			</form>
 		</div>

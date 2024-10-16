@@ -16,7 +16,7 @@ import javax.persistence.Persistence;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-
+import model.Category;
 import model.Product;
 
 @WebServlet("/addProduct")
@@ -30,14 +30,14 @@ public class AddProduct extends HttpServlet {
 			int quantity = Integer.parseInt(req.getParameter("quantity"));
 			String quantityUnit = req.getParameter("quantity-unit");
 			double price = Double.parseDouble(req.getParameter("price"));
-			String category = req.getParameter("category");
+			String categoryname = req.getParameter("category");
 			String productImage = req.getParameter("productImage");
 			
-			System.out.println(productName + " " + quantity + " " + quantityUnit + " " + price + " " + category + " " + productImage);
+			System.out.println(productName + " " + quantity + " " + quantityUnit + " " + price + " " + categoryname + " " + productImage);
 			
 			RequestDispatcher rd = req.getRequestDispatcher("addData.jsp");
 			
-			if(productName.isEmpty() || productImage.isEmpty() || category.isEmpty() || Integer.toString(quantity).isBlank() || Double.toString(price).isBlank()) {
+			if(productName.isEmpty() || productImage.isEmpty() || categoryname.isEmpty() || Integer.toString(quantity).isBlank() || Double.toString(price).isBlank()) {
 				req.setAttribute("error", "Please Fill The Fields");
 			}
 			else {
@@ -78,7 +78,7 @@ public class AddProduct extends HttpServlet {
 									break;
 								}
 							}
-								
+							Category category = em.find(Category.class, categoryname);
 							product.setId(id);
 							product.setName(productName);
 							product.setPrice(price);

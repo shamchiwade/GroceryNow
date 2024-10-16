@@ -182,11 +182,15 @@ img {
 <body>
 	<div class="admin-container">
 		<div class="admin-header">
-			<h1>Remove Data</h1>
-			<p>This page allows you to remove data from the database.</p>
+			<h1>Remove Product</h1>
+			<p>This page allows you to remove product from the database.</p>
 			<a href="logout" class="logout-button">Logout</a>
 		</div>
 		<div class="table-container">
+		
+		<button class="btn" onclick="location.href='adminHome.jsp'"><%="<"%></button>
+		<button class="btn" onclick="location.href='removeData.jsp'">&#10227;</button>
+		
 		<h3 class="success">${msg}</h3>
 			<table class="data-table">
 				<tr>
@@ -209,7 +213,14 @@ img {
 				%>
 				<tr>
 					<td><%=product.getId()%></td>
-					<td><%=product.getCategory()%></td>
+					<%
+					try {
+					%>
+					<td><%=product.getCategory().getName()%></td>
+					<%
+					}
+					catch(NullPointerException npe){}
+					%>
 					<td><img src="<%=product.getImage()%>" alt="Product Image"></td>
 					<td><%=product.getName()%></td>
 					<td><%=product.getPrice()%></td>
@@ -229,8 +240,6 @@ img {
 			</table>
 		</div>
 
-		<button class="btn" onclick="location.href='adminHome.jsp'"><%="<"%></button>
-		<button class="btn" onclick="location.href='removeData.jsp'">&#10227;</button>
 
 		<div class="admin-footer">
 			<p>Made With ❤ &copy; 2024 GloceryNow</p>
