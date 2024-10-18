@@ -1,0 +1,15 @@
+0:0:0:0:0:0:0:1 - - [18/Oct/2024:00:00:42 +0530] "GET /ShopManagement/adminLogin.jsp HTTP/1.1" 200 2860
+0:0:0:0:0:0:0:1 - - [18/Oct/2024:00:00:50 +0530] "POST /ShopManagement/adminLogin HTTP/1.1" 200 3447
+0:0:0:0:0:0:0:1 - - [18/Oct/2024:00:00:57 +0530] "GET /ShopManagement/viewData.jsp HTTP/1.1" 200 8987
+0:0:0:0:0:0:0:1 - - [18/Oct/2024:00:01:04 +0530] "GET /ShopManagement/adminHome.jsp HTTP/1.1" 200 3447
+0:0:0:0:0:0:0:1 - - [18/Oct/2024:00:01:10 +0530] "GET /ShopManagement/updateData.jsp HTTP/1.1" 200 21138
+0:0:0:0:0:0:0:1 - - [18/Oct/2024:00:01:16 +0530] "GET /ShopManagement/adminHome.jsp HTTP/1.1" 200 3447
+0:0:0:0:0:0:0:1 - - [18/Oct/2024:00:01:35 +0530] "GET /ShopManagement/categoryManagement.jsp HTTP/1.1" 200 14872
+0:0:0:0:0:0:0:1 - - [18/Oct/2024:00:02:25 +0530] "GET /ShopManagement/adminHome.jsp HTTP/1.1" 200 3447
+0:0:0:0:0:0:0:1 - - [18/Oct/2024:00:02:29 +0530] "GET /ShopManagement/logout HTTP/1.1" 200 484
+0:0:0:0:0:0:0:1 - - [18/Oct/2024:00:02:30 +0530] "GET /ShopManagement/style.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [18/Oct/2024:00:02:32 +0530] "GET /ShopManagement/login.jsp HTTP/1.1" 200 2908
+0:0:0:0:0:0:0:1 - - [18/Oct/2024:00:02:41 +0530] "POST /ShopManagement/login HTTP/1.1" 200 19134
+0:0:0:0:0:0:0:1 - - [18/Oct/2024:00:05:03 +0530] "GET /ShopManagement/logout? HTTP/1.1" 200 484
+0:0:0:0:0:0:0:1 - - [18/Oct/2024:00:05:07 +0530] "GET /ShopManagement/login.jsp HTTP/1.1" 200 2908
+0:0:0:0:0:0:0:1 - - [18/Oct/2024:00:05:15 +0530] "POST /ShopManagement/login HTTP/1.1" 200 19134

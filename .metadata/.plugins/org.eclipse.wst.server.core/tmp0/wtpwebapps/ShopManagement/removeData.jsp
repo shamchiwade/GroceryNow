@@ -190,7 +190,6 @@ img {
 		
 		<button class="btn" onclick="location.href='adminHome.jsp'"><%="<"%></button>
 		<button class="btn" onclick="location.href='removeData.jsp'">&#10227;</button>
-		
 		<h3 class="success">${msg}</h3>
 			<table class="data-table">
 				<tr>

@@ -12,7 +12,6 @@ INDEX VERSION 1.134+C:\Users\AAYUSH\Desktop\Projects\GroceryNow\.metadata\.plugi
 1255169256.index
 709185867.index
 658784756.index
-3242703880.index
 1072601051.index
 33939142.index
 1730639538.index
@@ -37,6 +36,7 @@ INDEX VERSION 1.134+C:\Users\AAYUSH\Desktop\Projects\GroceryNow\.metadata\.plugi
 2031189735.index
 3118691506.index
 1520363319.index
+1865797976.index
 2113193463.index
 2617501553.index
 687378423.index
