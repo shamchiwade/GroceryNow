@@ -326,19 +326,6 @@ keyframes zoomIn {from { transform:scale(0.5);
 to {
 	transform: scale(1);
 }
-
-}
-.admin-footer {
-	background-color: #f0f0f0;
-	padding: 10px;
-	text-align: center;
-	clear: both;
-	border-top: 1px solid #ddd;
-}
-
-.admin-footer p {
-	margin-bottom: 0;
-	font-size: 14px;
 }
 </style>
 </head>
@@ -483,10 +470,6 @@ to {
 		</ul>
 		<p>Total: $0.00</p>
 		<button class="checkout-button">Checkout</button>
-	</div>
-
-	<div class="admin-footer">
-		<p>Made With ❤ &copy; 2024 GloceryNow</p>
 	</div>
 
 	<script>

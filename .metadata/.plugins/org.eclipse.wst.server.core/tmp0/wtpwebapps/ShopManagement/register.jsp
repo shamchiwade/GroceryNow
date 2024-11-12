@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Shop Management System - Register</title>
+<title>GroceryNow - Register</title>
 <style type="text/css">
 @charset "UTF-8";
 
@@ -115,7 +115,7 @@ button {
 </head>
 <body>
 	<div class="main">
-		<h1>Shop Management System</h1>
+		<h1>GroceryNow</h1>
 		<h3>Register</h3>
 		<form action="register" method="post">
 			<label for="name">Name:</label> <input type="text" id="name"

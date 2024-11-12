@@ -1,11 +1,11 @@
 <html>
 <head>
-    <title>Shop Management System - Index</title>
+    <title>GroceryNow - Index</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="main">
-        <h1>Shop Management System</h1>
+        <h1>GroceryNow</h1>
         <h3>Login as:</h3>
         <div class="options">
             

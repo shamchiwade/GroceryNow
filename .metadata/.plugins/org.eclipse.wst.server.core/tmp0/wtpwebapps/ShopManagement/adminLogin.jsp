@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Shop Management System - Admin Login</title>
+<title>GroceryNow - Admin Login</title>
 <style type="text/css">
 @charset "UTF-8";
 
@@ -116,7 +116,7 @@ button {
 </head>
 <body>
 	<div class="main">
-		<h1>Shop Management System Admin</h1>
+		<h1>GroceryNow Admin</h1>
 		<h3>Admin Login</h3>
 		<form action="adminLogin" method="post">
 			<label for="email">Email:</label> <input type="email" id="email"

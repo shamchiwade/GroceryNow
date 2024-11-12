@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>GroceryNow - Admin Login</title>
+<title>GroceryNow - Login</title>
 <style type="text/css">
 @charset "UTF-8";
 
@@ -116,9 +116,9 @@ button {
 </head>
 <body>
 	<div class="main">
-		<h1>GroceryNow Admin</h1>
-		<h3>Admin Login</h3>
-		<form action="adminLogin" method="post">
+		<h1>Shop Management System</h1>
+		<h3>Login</h3>
+		<form action="login" method="post">
 			<label for="email">Email:</label> <input type="email" id="email"
 				name="em" required> <label for="password">Password:</label>
 			<button class="pass" id="pass1"
@@ -126,10 +126,12 @@ button {
 			<input type="password" id="password" name="ps" required>
 			<p style="color: red;">${error}</p>
 			<button type="submit">Login</button>
-			<button class="btn" onclick="location.href='index.jsp'"><%="<"%></button>
-			<button class="btn" onclick="location.href='adminLogin.jsp'">&#10227;</button>
-
 		</form>
+		<p>
+			Not registered? <a href="register.jsp">Create an account</a>
+		</p>
+		<button class="btn" onclick="location.href='index.jsp'"><%="<"%></button>
+		<button class="btn" onclick="location.href='login.jsp'">&#10227;</button>
 	</div>
 
 	<script type="text/javascript">
