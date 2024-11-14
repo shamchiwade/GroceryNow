@@ -4740,3 +4740,16 @@ java.lang.ArrayIndexOutOfBoundsException: Index 1 out of bounds for length 1
 	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:2492)
 	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor.lambda$1(IDEWorkbenchAdvisor.java:553)
 	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:124)
+!SESSION 2024-11-14 23:30:45.346 -----------------------------------------------
+eclipse.buildId=4.32.0.20240606-1231
+java.version=22.0.2
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_IN
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY ch.qos.logback.classic 1 0 2024-11-14 23:30:51.529
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2024-11-14 23:31:19.645
+!MESSAGE Logback config file: C:\Users\AAYUSH\Desktop\Projects\GroceryNow\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.6.1.20240411-1122.xml
