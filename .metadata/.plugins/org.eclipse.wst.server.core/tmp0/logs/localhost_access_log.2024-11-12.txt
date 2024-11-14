@@ -30,3 +30,4 @@
 0:0:0:0:0:0:0:1 - - [12/Nov/2024:12:23:58 +0530] "GET /ShopManagement/login.jsp HTTP/1.1" 200 2884
 0:0:0:0:0:0:0:1 - - [12/Nov/2024:12:24:06 +0530] "POST /ShopManagement/login HTTP/1.1" 200 19134
 0:0:0:0:0:0:0:1 - - [12/Nov/2024:12:26:29 +0530] "POST /ShopManagement/login HTTP/1.1" 200 19419
+0:0:0:0:0:0:0:1 - - [12/Nov/2024:12:35:34 +0530] "GET /ShopManagement/logout? HTTP/1.1" 200 442

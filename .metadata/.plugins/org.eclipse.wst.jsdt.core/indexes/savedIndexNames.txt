@@ -1,6 +1,5 @@
 INDEX VERSION 1.4+C:\Users\AAYUSH\Desktop\Projects\GroceryNow\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
 274265639.index
-2707347856.index
 2616888407.index
 3796631248.index
 3534586869.index
