@@ -50,7 +50,7 @@ body {
 }
 
 .admin-header {
-	background-color: #337ab7;
+	background-color: #337ab8;
 	color: #fff;
 	padding: 30px 10px;
 	text-align: center;
